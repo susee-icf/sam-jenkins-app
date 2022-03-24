@@ -11,6 +11,8 @@ pipeline {
     stage('Build') {
       steps {
         unstash 'venv'
+        sh 'sudo node -v'
+        sh 'sudo nvm ls'
         sh 'venv/bin/sam build'
         stash includes: '**/.aws-sam/**/*', name: 'aws-sam'
       }
