@@ -6,11 +6,13 @@ pipeline {
       steps {
         sh 'python3 -m venv venv && venv/bin/pip install aws-sam-cli'
         stash includes: '**/venv/**/*', name: 'venv'
+        sh 'echo $PATH'
       }
     }
     stage('Build') {
       steps {
         unstash 'venv'
+        sh 'echo $PATH'
         sh 'node -v'
         sh 'nvm ls'
         sh 'venv/bin/sam build'
